@@ -78,7 +78,7 @@ app.post('/books', (req, res) => {
 
 // PUT /api/books/:id - Update a book
 app.put('/books/:id', (req, res) => {
-    const bookId = paresInt(req.params.id);
+    const bookId = parseInt(req.params.id);
     const { title, author, genre, copiesAvailable } = req.body;
 
     // Find the book to update
