@@ -33,9 +33,11 @@ const port = 2000;
 app.use(express.json());
 
 // Start the server
-app.listen(port, () => {
-    console.log(`Library API running at http://localhost:${port}`);
-});
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`Library API running at http://localhost:${port}`);
+    });
+}
 
 // GET /api/books - Get all books
 app.get('/books', (req, res) => {
@@ -119,13 +121,7 @@ app.delete('/books/:id', (req, res) => {
     res.json({ message: 'Book deleted successfully', book: deletedBook});
 });
 
-/* Create your REST API here with the following endpoints:
-    'GET /api/books': 'Get all books',
-    'GET /api/books/:id': 'Get a specific book',
-    'POST /api/books': 'Add a new book',
-    'PUT /api/books/:id': 'Update a book',
-    'DELETE /api/books/:id': 'Delete a book'
-*/
+module.exports = app;
 
 
 
