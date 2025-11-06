@@ -19,7 +19,7 @@ describe('Books API', () => {
     });
 
     test('should not find resource for nonexistent ID', async () => {
-        const response = await(app).get('/books/999');
+        const response = await request(app).get('/books/999');
 
         expect(response.status).toBe(404);
         expect(response.body).toHaveProperty('error');
@@ -66,24 +66,24 @@ describe('Books API', () => {
             copiesAvailable: 4
         }
 
-        const response = request(app)
+        const response = await request(app)
             .put('/books/999')
             .send(updatedBook);
 
         expect(response.status).toBe(404)
         expect(response.body).toHaveProperty('error');
-    })
+    });
 
     test('should delete existing book', async () => {
         const response = await request(app).delete('/books/1');
         expect(response.status).toBe(200);
         expect(response.body).toHaveProperty('message');
-    })
+    });
 
     test('should not delete resource with nonexistent ID', async () => {
-        const response = request(app).delete('/books/999');
+        const response = await request(app).delete('/books/999');
 
         expect(response.status).toBe(404);
         expect(response.body).toHaveProperty('error');
-    }) 
+    }) ;
 });
